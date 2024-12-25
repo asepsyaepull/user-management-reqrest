@@ -1,124 +1,92 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import InputField from '../../components/ui/InputField';
+import { Mail, Lock, Eye, EyeOff, Leaf } from 'lucide-react';
+import Toast from '../../components/ui/Toast';
+import useLogin from '../../hooks/useLogin';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
-    const [form, setForm] = useState({
-        email: "",
-        password: "",
-    })
+    const { formData, handleChange, handleLogin, loading, showPassword, setShowPassword, toast, setToast } = useLogin();
 
-    const [success, setSuccess] = useState("")
-    const [error, setError] = useState("")
-    const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
+    const buttonText = loading ?
+        <span className="loading loading-spinner loading-md">Loading</span> : 'Login';
 
-
-    const handleChange = (e) => {
-        setError("");
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value,
-        });
-    }
-
-    const handleLogin = async () => {
-        setLoading(true);
-        try {
-            const response = await axios.post('https://reqres.in/api/login', form);
-            localStorage.setItem("access_token", response.data.accessToken);
-            localStorage.setItem("refresh_token", response.data.refreshToken);
-            setSuccess("Login berhasil..")
-
-            setTimeout(() => {
-                navigate('/')
-            }, 2000)
-        } catch (error) {
-            console.error('Error fetching data:', error);
-            setError(error.response.data.error)
-        } finally {
-            setLoading(false)
-        }
-    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        handleLogin();
+    };
 
     return (
-        <div className="bg-gray-100 min-h-screen flex flex-col">
-            <div className="flex flex-grow items-center justify-center">
-                <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-                    <form class="space-y-6" action="#">
-                        <h5 class="text-center text-2xl font-bold text-gray-900 dark:text-white">Login</h5>
-                        {success && <p style={{ color: "green" }}>{success}</p>}
-                        {error && <p style={{ color: "red" }}>{error}</p>}
-                        <div>
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                            <input onChange={handleChange} type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
+        <div>
+            {toast && (
+                <Toast
+                    type={toast.type}
+                    message={toast.message}
+                    onClose={() => setToast(null)}
+                />
+            )}
+            <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
+                <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6 sm:p-8">
+                    <div className="text-center mb-8">
+                        <div className="inline-flex items-center justify-center w-12 h-12 bg-olive-100 rounded-full mb-4">
+                            <Leaf className="w-6 h-6 text-olive-700" />
                         </div>
-                        <div>
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                            <input onChange={handleChange} type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Welcome back</h1>
+                        <p className="text-gray-600">Sign in to continue to your account</p>
+                    </div>
+                    <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-sm">
+                        <InputField
+                            icon={<Mail size={20} />}
+                            type="email"
+                            name="email"
+                            placeholder="Email address"
+                            value={formData.email}
+                            onChange={handleChange}
+                        />
+
+                        <InputField
+                            icon={<Lock size={20} />}
+                            type={showPassword ? 'text' : 'password'}
+                            name="password"
+                            placeholder="Password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            endIcon={
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="text-gray-400 hover:text-gray-600"
+                                >
+                                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                </button>
+                            }
+                        />
+                        <div className="flex items-center justify-between text-sm">
+                            <label className="flex items-center space-x-2">
+                                <input type="checkbox" className="rounded border-gray-300" />
+                                <span className="text-gray-600">Remember me</span>
+                            </label>
+                            <a href="#" className="text-olive-700 hover:text-olive-800">Forgot password?</a>
                         </div>
-                        <div class="flex items-start">
-                            <div class="flex items-start">
-                                <div class="flex items-center h-5">
-                                    <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" />
-                                </div>
-                                <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
-                            </div>
-                            <a href="#" class="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
-                        </div>
-                        <button onClick={handleLogin} type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{loading ? "Loading.." : "Login"}</button>
-                        <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
-                            Not registered? <a href="#" class="text-blue-700 hover:underline dark:text-blue-500">Create account</a>
-                        </div>
+                        <button
+                            onClick={handleLogin}
+                            type="submit"
+                            className="w-full bg-olive-700 text-white py-3 rounded-lg font-medium hover:bg-olive-800 transition-colors"
+                        >
+                            {buttonText}
+                        </button>
+
+                        <p className="text-center text-gray-600 text-sm">
+                            Don't have an account?{' '}
+                            <Link to="/register" className="text-olive-700 hover:text-olive-800 font-medium">
+                                Sign up
+                            </Link>
+                        </p>
                     </form>
                 </div>
-                {/* login */}
-                {/* <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
-                    <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h1>
-                    {success && <p style={{ color: "green" }}>{success}</p>}
-                    {error && <p style={{ color: "red" }}>{error}</p>}
-                    <form>
-                        <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                                email
-                            </label>
-                            <input
-                                onChange={handleChange}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="email"
-                                name="email"
-                                type="email"
-                                placeholder="Enter your email"
-                            />
-                        </div>
-                        <div className="mb-6">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                                Password
-                            </label>
-                            <input
-                                onChange={handleChange}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                                id="password"
-                                name='password'
-                                type="password"
-                                placeholder="Enter your password"
-                            />
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <button
-                                onClick={handleLogin}
-                                disabled={loading}
-                                className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                type="button"
-                            >
-                                {loading ? "Loading.." : "Login"}
-                            </button>
-                        </div>
-                    </form>
-                </div> */}
             </div>
         </div>
     );
-}
+};
 
 export default LoginPage;

@@ -1,33 +1,37 @@
 import React, { useEffect } from 'react';
 import Navbar from '../../components/Navbar';
-import { Link } from 'react-router-dom';
 import useUser from '../../hooks/useUser';
+import HeaderHome from '../../components/ui/headerHome';
+import ProfileCard from '../../components/ui/profileCard';
+import { mockUsers } from '../../data/mockUsers';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
     const { users, pagination, totalPages, getData, handleNextPage, handlePrevPage } = useUser();
+    const navigate = useNavigate();
 
     useEffect(() => {
         getData();
     }, [pagination]);
 
+    const handleDetail = (user) => {
+        navigate(`/detail-profile/${user.id}`);
+    }
+
     return (
         <div>
             <Navbar />
-            <div className="container mx-auto p-4">
-                <h1 className="text-2xl font-bold mb-4">User List</h1>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {Array.isArray(users) && users.map((user) => (
-                        <div key={user.id} className="p-4 border rounded shadow">
-                            <img src={user.avatar} alt={user.first_name} className="w-24 h-24 rounded-full mx-auto" />
-                            <h2 className="text-xl text-center mt-2">{user.first_name} {user.last_name}</h2>
-                            <p className="text-center">{user.email}</p>
-                            <div>
-                                <Link to={`/detail-profile/${user.id}`} className="block text-center mt-2 text-blue-500">View Profile</Link>
-                            </div>
-                        </div>
+            {/*  Main Content */}
+            <div className='max-w-7xl mx-auto my-10 '>
+                <h1 className="text-2xl font-bold mb-4">Guides</h1>
+                <HeaderHome />
+                <div className="space-y-4">
+                    {(users.length > 0 ? users : mockUsers).map((user) => (
+                        <ProfileCard onClick={() => handleDetail(user)} key={user.id} user={user} />
                     ))}
                 </div>
-                <nav className="flex justify-end mt-4">
+            </div>
+            <nav className="flex max-w-7xl mx-auto justify-end mt-4 mb-20">
                     <ul className="inline-flex items-center -space-x-px gap-2">
                         <li>
                             <button
@@ -53,8 +57,7 @@ const HomePage = () => {
                             </button>
                         </li>
                     </ul>
-                </nav>
-            </div>
+            </nav>
         </div>
     );
 };

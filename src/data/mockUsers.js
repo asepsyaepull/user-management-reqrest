@@ -1,0 +1,57 @@
+export const mockUsers = [
+    {
+        id: 1,
+        email: "george.bluth@reqres.in",
+        first_name: "George",
+        last_name: "Bluth",
+        avatar: "https://reqres.in/img/faces/1-image.jpg",
+        phone: "+1 (555) 111-2222",
+        role: "Venice Tour Guide",
+
+    },
+    {
+        id: 2,
+        email: "janet.weaver@reqres.in",
+        first_name: "Janet",
+        last_name: "Weaver",
+        avatar: "https://reqres.in/img/faces/2-image.jpg",
+        phone: "+1 (555) 222-3333",
+        role: "Serengeti Tour Guide",
+    },
+    {
+        id: 3,
+        email: "emma.wong@reqres.in",
+        first_name: "Emma",
+        last_name: "Wong",
+        avatar: "https://reqres.in/img/faces/3-image.jpg",
+        phone: "+1 (555) 333-4444",
+        role: "Swiss Alps Tour Guide",
+    },
+    {
+        id: 4,
+        email: "eve.holt@reqres.in",
+        first_name: "Eve",
+        last_name: "Holt",
+        avatar: "https://reqres.in/img/faces/4-image.jpg",
+        phone: "+1 (555) 444-5555",
+        role: "Bali Tour Guide",
+    },
+    {
+        id: 5,
+        email: "charles.morris@reqres.in",
+        first_name: "Charles",
+        last_name: "Morris",
+        avatar: "https://reqres.in/img/faces/5-image.jpg",
+        phone: "+1 (555) 555-6666",
+        role: "Machu Picchu Tour Guide",
+    },
+    {
+        id: 6,
+        email: "tracey.ramos@reqres.in",
+        first_name: "Tracey",
+        last_name: "Ramos",
+        avatar: "https://reqres.in/img/faces/6-image.jpg",
+        phone: "+1 (555) 666-7777",
+        role: "Great Wall Tour Guide",
+    }
+]
