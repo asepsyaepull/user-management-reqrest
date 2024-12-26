@@ -1,11 +1,11 @@
 import React from 'react';
 import { User, Settings, LogOut } from 'lucide-react';
+import useLogin from '../../hooks/useLogin';
 
 const MobileProfileMenu = () => {
-    const handleLogout = useLogin();
+    const { handleLogout } = useLogin();
 
-    const handleLogoutClick = (e) => {
-        e.prevenDefault();
+    const handleLogoutClick = () => {
         handleLogout();
     }
 
@@ -38,13 +38,13 @@ const MobileProfileMenu = () => {
                     <Settings className="h-5 w-5 mr-3" />
                     Settings
                 </a>
-                <button
+                <a
                     onClick={handleLogoutClick}
                     className="flex items-center px-4 py-2 text-base text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                     <LogOut className="h-5 w-5 mr-3" />
                     Sign out
-                </button>
+                </a>
             </div>
         </div>
     );

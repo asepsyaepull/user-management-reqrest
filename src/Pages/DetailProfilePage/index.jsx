@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../../components/Navbar';
+import DetailProfileInfo from '../../components/ui/detailProfileInfo';
+import DetailProfileSkills from '../../components/ui/detailProfileSkill';
+import DetailProfileExperiences from '../../components/ui/detailProfileExperience';
+import { MessageSquare, Phone } from 'lucide-react';
 
 const DetailProfilePage = () => {
   const { userId } = useParams();
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
 
   const getUser = async () => {
     try {
@@ -21,78 +27,60 @@ const DetailProfilePage = () => {
   }, [userId]);
 
   if (!user) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <span className="loading loading-dots loading-lg"></span>
+      </div>
+    );
   }
 
   return (
-    <div>
+    <div className='bg-gray-50 dark:bg-gray-900 transition-colors'>
       <Navbar />
-      {/* <div className="container mx-auto p-4">
-        <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-          <div className="flex flex-col md:flex-row">
-            <div className="md:flex-shrink-0">
-              <img className="h-48 w-full object-cover md:h-full md:w-48" src={user.avatar} alt={user.first_name} />
+      <div className="min-h-screen ">
+        <div className="max-w-5xl mx-auto ">
+          {/* breadcrumb */}
+          <div className="breadcrumbs text-sm py-8">
+            <ul>
+              <li><a>Home</a></li>
+              <li><a onClick={() => navigate('/list-user')} >List User</a></li>
+              <li>Detail User</li>
+            </ul>
+          </div>
+          <div className="relative">
+            <div className="h-36 sm:h-48 bg-olive-600 rounded-lg">
+              <img
+                src="https://images.unsplash.com/photo-1633432695542-b2c8e2b8a26c?q=80&w=3432&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Cover"
+                className="w-full h-full object-cover rounded-lg"
+              />
             </div>
-            <div className="p-8 flex-1">
-              <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{user.first_name} {user.last_name}</div>
-              <p className="block mt-1 text-lg leading-tight font-medium text-black">{user.email}</p>
-              <p className="mt-2 text-gray-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.</p>
+            <div className="absolute -bottom-16 left-4 sm:left-8">
+              <img
+                src={user.avatar}
+                alt={user.first_name}
+                className="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl border-4 border-white dark:border-gray-800 shadow-lg"
+              />
+            </div>
+            <div className="absolute top-4 right-4 flex gap-2 sm:gap-3">
+              <button className="p-2 sm:p-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-colors">
+                <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 text-olive-700 dark:text-olive-300" />
+              </button>
+              <button className="p-2 sm:p-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-colors">
+                <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-olive-700 dark:text-olive-300" />
+              </button>
             </div>
           </div>
-        </div>
-      </div> */}
-      <div className="relative w-full h-[300px]">
-        <div className="w-full h-full bg-olive-600">
-          {/* Cover image */}
-          <img
-            src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e"
-            alt="Cover"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* Profile picture */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-24">
-          <div className="w-48 h-48 rounded-full border-4 border-white overflow-hidden bg-teal-900">
-            <img
-              src={user.avatar} alt={user.first_name}
-              className="w-full h-full object-cover"
-            />
+          <div className="mt-20 px-4 sm:px-8">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">{`${user.first_name} ${user.last_name}`}</h1>
+            <p className="text-gray-500 dark:text-gray-400 mt-1">{user.email}</p>
           </div>
+          <DetailProfileInfo />
+          <DetailProfileSkills />
+          <DetailProfileExperiences />
         </div>
       </div>
-      <div className="text-center mt-28">
-        <h1 className="text-4xl font-bold">{user.first_name} {user.last_name}</h1>
-        <p className="text-gray-600 mb-4">{user.email}</p>
-        <p className="text-gray-600 mb-4">Uzbekistan, Tashkent</p>
-        <p className="text-gray-700 max-w-md mx-auto">
-          I'm web designer. I work in programs like figma, adobe photoshop, adobe illustrator
-        </p>
-
-        <div className="flex justify-center gap-16 my-8">
-          <div className="text-center">
-            <p className="text-4xl font-bold">21</p>
-            <p className="text-gray-600">Shots</p>
-          </div>
-          <div className="text-center">
-            <p className="text-4xl font-bold">238</p>
-            <p className="text-gray-600">Followers</p>
-          </div>
-          <div className="text-center">
-            <p className="text-4xl font-bold">101</p>
-            <p className="text-gray-600">Following</p>
-          </div>
-        </div>
-        <div className="flex justify-center gap-4">
-          <button className="bg-olive-700 text-white px-8 py-2 rounded-md hover:bg-olive-800 transition">
-            Follow
-          </button>
-          <button className="border border-gray-300 px-8 py-2 rounded-md hover:bg-gray-50 transition">
-            Message
-          </button>
-        </div>
-      </div>
-    </div>
+    </div > 
   );
 };
 

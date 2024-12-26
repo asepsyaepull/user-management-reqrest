@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { Leaf, Menu } from 'lucide-react';
 import Navigation from '../ui/Navigation';
 import DarkModeToggle from '../ui/DarkModeTogle';
@@ -7,9 +6,12 @@ import ProfileDropdown from '../ui/profileDropDown';
 import MobileMenu from '../ui/MobileMenu';
 import MobileNavigation from '../ui/MobileNavigationMenu';
 import MobileProfileMenu from '../ui/MobileProfileMenu';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const token = localStorage.getItem("access_token");
+
 
     return (
         <>
@@ -23,7 +25,13 @@ const Navbar = () => {
                         <div className="hidden md:flex items-center space-x-4">
                             <Navigation />
                             <DarkModeToggle />
-                            <ProfileDropdown />
+                            {token ? (
+                                <ProfileDropdown />
+                            ) : (
+                                <Link to="/login" className="px-8 py-2 bg-olive-600 hover:bg-olive-700 text-white rounded-lg transition-colors">
+                                    Login
+                                </Link>
+                            )}
                         </div>
 
                         {/* Mobile menu button */}

@@ -2,7 +2,8 @@ import React from 'react';
 
 const Navigation = () => {
     const menuItems = [
-        { label: 'Tour Guide', href: '/' },
+        { label: 'Home', href: '/' },
+        { label: 'List User', href: '/list-user' },
     ];
 
     return (

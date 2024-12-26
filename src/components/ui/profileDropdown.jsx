@@ -6,7 +6,7 @@ import useLogin from '../../hooks/useLogin';
 const ProfileDropdown = () => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef();
-    const handleLogout = useLogin();
+    const { handleLogout } = useLogin();
 
     useClickOutside(dropdownRef, () => setIsOpen(false));
 
@@ -32,27 +32,27 @@ const ProfileDropdown = () => {
             {isOpen && (
                 <div className="absolute right-0 mt-2 w-48 py-2 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700">
                     <a
-                        href="/profile"
+                        href="#"
                         className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                     >
                         <User className="h-4 w-4 mr-2" />
                         Profile
                     </a>
                     <a
-                        href="javascript:void(0)"
+                        href="#"
                         className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                     >
                         <Settings className="h-4 w-4 mr-2" />
                         Settings
                     </a>
                     <hr className="my-1 border-gray-200 dark:border-gray-700" />
-                    <button
+                    <a
                         onClick={handleLogoutClick}
-                        className="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:cursor-pointer"
                     >
                         <LogOut className="h-4 w-4 mr-2" />
                         Logout
-                    </button>
+                    </a>
                 </div>
             )}
         </div>

@@ -2,7 +2,8 @@ import React from 'react';
 
 const MobileNavigation = () => {
     const menuItems = [
-        { label: 'Tour Guide', href: '/' },
+        { label: 'Home', href: '/' },
+        { label: 'List User', href: '/list-user' },
     ];
 
     return (
