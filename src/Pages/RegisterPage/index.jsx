@@ -4,6 +4,7 @@ import InputField from '../../components/ui/InputField';
 import Toast from '../../components/ui/Toast';
 import { Eye, EyeOff, Lock, Mail, Sprout } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useDarkMode } from '../../hooks/useDarkMode';
 
 const RegisterPage = () => {
   const { formDataRegister, handleChange, handleRegister, loading, showPassword, setShowPassword, toast, setToast } = useRegister();
