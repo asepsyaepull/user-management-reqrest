@@ -20,6 +20,7 @@ const ProfileDropdown = () => {
     const confirmLogout = () => {
         handleLogout();
         navigate('/');
+        window.location.reload();
     };
 
     return (
