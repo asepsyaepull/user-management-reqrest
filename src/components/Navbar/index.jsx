@@ -55,7 +55,13 @@ const Navbar = () => {
                         <div className="px-4 py-3">
                             <DarkModeToggle />
                         </div>
-                        <MobileProfileMenu />
+                        {token ? (
+                            <MobileProfileMenu />
+                        ) : (
+                            <Link to="/login" className="px-8 py-2 bg-olive-600 hover:bg-olive-700 text-white rounded-lg transition-colors">
+                                Login
+                            </Link>
+                        )}
                     </div>
                 </div>
             </MobileMenu>
