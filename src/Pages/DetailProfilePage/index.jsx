@@ -42,7 +42,7 @@ const DetailProfilePage = () => {
       <div className="min-h-screen ">
         <div className="max-w-5xl mx-auto pb-20">
           {/* breadcrumb */}
-          <div className="breadcrumbs text-sm text-gray-900 dark:text-white py-8">
+          <div className="breadcrumbs text-sm text-gray-900 dark:text-white px-4 py-8">
             <ul>
               <li><a>Home</a></li>
               <li><a onClick={() => navigate('/list-user')} >List User</a></li>

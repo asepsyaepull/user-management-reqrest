@@ -39,7 +39,7 @@ const useLogin = () => {
                 message: 'Login Berhasil..'
             });
             setTimeout(() => {
-                navigate('/list-user');
+                navigate('/');
             }, 2000);
         } catch (error) {
             setToast({
