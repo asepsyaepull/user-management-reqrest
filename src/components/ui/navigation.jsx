@@ -1,10 +1,14 @@
 import React from 'react';
 
 const Navigation = () => {
-    const menuItems = [
-        { label: 'Home', href: '/' },
-        { label: 'List User', href: '/list-user' },
-    ];
+    const getMenuItems = () => {
+        return [
+            { label: 'Home', href: '/' },
+            { label: 'List User', href: '/list-user' },
+        ];
+    };
+
+    const menuItems = getMenuItems();
 
     return (
         <div className="flex space-x-4">
