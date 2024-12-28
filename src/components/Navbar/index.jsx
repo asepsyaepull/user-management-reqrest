@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Leaf, Menu } from 'lucide-react';
-import Navigation from '../ui/Navigation';
+import Navigation from '../ui/navigation';
 import DarkModeToggle from '../ui/DarkModeTogle';
 import ProfileDropdown from '../ui/profileDropDown';
 import MobileMenu from '../ui/MobileMenu';
