@@ -14,6 +14,10 @@ const MobileProfileMenu = () => {
     const confirmLogout = () => {
         handleLogout();
         window.location.reload();
+        const refreshLink = () => {
+            window.location.href = window.location.href;
+        };
+        refreshLink();
     };
 
     return (
