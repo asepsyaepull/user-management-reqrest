@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const token = localStorage.getItem("access_token");
-
+    
 
     return (
         <>

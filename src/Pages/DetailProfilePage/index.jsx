@@ -38,7 +38,7 @@ const DetailProfilePage = () => {
     <div className='bg-gray-50 dark:bg-gray-900 transition-colors'>
       <Navbar />
       <div className="min-h-screen ">
-        <div className="max-w-5xl mx-auto ">
+        <div className="max-w-5xl mx-auto pb-20">
           {/* breadcrumb */}
           <div className="breadcrumbs text-sm py-8">
             <ul>
