@@ -1,13 +1,14 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
 
-const MobileNavigation = () => {
-    const getMenuItems = () => {
-        return [
-            { label: 'Home', href: '/' },
-            { label: 'List User', href: '/list-user' },
-        ];
-    };
+const getMenuItems = () => {
+    return [
+        { label: 'Home', href: '/' },
+        { label: 'List User', href: '/list-user' },
+    ];
+};
 
+const MobileNavigation = () => {
     const menuItems = getMenuItems();
 
     return (
