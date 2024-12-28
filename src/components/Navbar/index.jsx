@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Leaf, Menu } from 'lucide-react';
 import Navigation from '../ui/navigation';
-import DarkModeToggle from '../ui/DarkModeTogle';
+import DarkModeToggle from '../ui/darkModeTogle';
 import ProfileDropdown from '../ui/profileDropDown';
-import MobileMenu from '../ui/MobileMenu';
-import MobileNavigation from '../ui/MobileNavigationMenu';
-import MobileProfileMenu from '../ui/MobileProfileMenu';
+import MobileMenu from '../ui/mobileMenu';
+import MobileNavigation from '../ui/mobileNavigationMenu';
+import MobileProfileMenu from '../ui/mobileProfileMenu';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
