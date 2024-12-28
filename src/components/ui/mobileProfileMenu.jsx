@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { User, Settings, LogOut, X } from 'lucide-react';
 import useLogin from '../../hooks/useLogin';
+import { useNavigate } from 'react-router-dom';
 
 const MobileProfileMenu = () => {
     const { handleLogout } = useLogin();
     const [isLogoutPopupOpen, setIsLogoutPopupOpen] = useState(false);
-
+    const navigate = useNavigate()
 
     const handleLogoutClick = () => {
         setIsLogoutPopupOpen(true);
@@ -13,11 +14,7 @@ const MobileProfileMenu = () => {
 
     const confirmLogout = () => {
         handleLogout();
-        window.location.reload();
-        const refreshLink = () => {
-            window.location.href = window.location.href;
-        };
-        refreshLink();
+        navigate('/');
     };
 
     return (

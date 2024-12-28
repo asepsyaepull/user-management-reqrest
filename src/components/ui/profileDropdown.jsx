@@ -2,12 +2,14 @@ import React, { useState, useRef } from 'react';
 import { useClickOutside } from '../../hooks/useClickOutside';
 import { User, Settings, LogOut, Link, X } from 'lucide-react';
 import useLogin from '../../hooks/useLogin';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileDropdown = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isLogoutPopupOpen, setIsLogoutPopupOpen] = useState(false);
     const dropdownRef = useRef();
     const { handleLogout } = useLogin();
+    const navigate = useNavigate();
 
     useClickOutside(dropdownRef, () => setIsOpen(false));
 
@@ -17,11 +19,7 @@ const ProfileDropdown = () => {
 
     const confirmLogout = () => {
         handleLogout();
-        window.location.reload();
-        const refreshLink = () => {
-            window.location.href = window.location.href;
-        };
-        refreshLink();
+        navigate('/');
     };
 
     return (
