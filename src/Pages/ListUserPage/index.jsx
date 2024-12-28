@@ -34,8 +34,8 @@ const ListUserPage = () => {
     }
     if (!users) {
         return (
-            <div className="flex h-screen items-center justify-center">
-                <span className="loading loading-dots loading-lg"></span>
+            <div className="flex h-screen items-center justify-center bg-gray-50 dark:bg-gray-900 transition-colors">
+            <span className="loading loading-dots loading-lg text-gray-900 dark:text-white"></span>
             </div>
         );
     }

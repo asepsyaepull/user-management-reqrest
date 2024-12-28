@@ -9,7 +9,7 @@ export default function DetailProfileInfo() {
     ];
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-24 px-4 sm:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-16 px-4 sm:px-8">
             {info.map(({ icon: Icon, label, value }) => (
                 <div key={label} className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm transition-colors">
                     <div className="flex items-start gap-3">

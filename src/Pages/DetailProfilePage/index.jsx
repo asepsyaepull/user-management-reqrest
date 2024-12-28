@@ -28,19 +28,21 @@ const DetailProfilePage = () => {
 
   if (!user) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <span className="loading loading-dots loading-lg"></span>
+      <div className="flex h-screen items-center justify-center bg-gray-50 dark:bg-gray-900 transition-colors">
+        <span className="loading loading-dots loading-lg text-gray-900 dark:text-white"></span>
       </div>
     );
   }
 
   return (
     <div className='bg-gray-50 dark:bg-gray-900 transition-colors'>
-      <Navbar />
+      <div className="sticky top-0 z-50">
+        <Navbar />
+      </div>
       <div className="min-h-screen ">
         <div className="max-w-5xl mx-auto pb-20">
           {/* breadcrumb */}
-          <div className="breadcrumbs text-sm py-8">
+          <div className="breadcrumbs text-sm text-gray-900 dark:text-white py-8">
             <ul>
               <li><a>Home</a></li>
               <li><a onClick={() => navigate('/list-user')} >List User</a></li>
