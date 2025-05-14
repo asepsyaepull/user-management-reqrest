@@ -15,7 +15,11 @@ const DetailProfilePage = () => {
 
   const getUser = async () => {
     try {
-      const res = await axios.get(`https://reqres.in/api/users/${userId}`);
+      const res = await axios.get(`https://reqres.in/api/users/${userId}`, {
+        headers: {
+          'x-api-key': 'reqres-free-v1'
+        }
+      });
       setUser(res.data.data);
     } catch (err) {
       console.log(err);

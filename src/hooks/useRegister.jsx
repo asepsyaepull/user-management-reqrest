@@ -40,7 +40,11 @@ const useRegister = () => {
 
         setLoading(true);
         try {
-            await axios.post('https://reqres.in/api/register', formDataRegister);
+            await axios.post('https://reqres.in/api/register', formDataRegister, {
+                headers: {
+                    'x-api-key': 'reqres-free-v1'
+                }
+            });
             setToast({
                 type: 'success',
                 message: 'Register Berhasil! Silahkan login..'

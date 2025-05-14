@@ -32,7 +32,11 @@ const useLogin = () => {
         
         setLoading(true);
         try {
-            const response = await axios.post('https://reqres.in/api/login', formData);
+            const response = await axios.post('https://reqres.in/api/login', formData, {
+                headers: {
+                    'x-api-key': 'reqres-free-v1'
+                }
+            });
             localStorage.setItem("access_token", response.data.token);
             setToast({
                 type: 'success',
